@@ -1,0 +1,8 @@
+apps:
+  - script  : ./bin/www
+    name    : vue-template
+    instances : 1
+    exec_mode : fork
+    log_date_format : YYYY-MM-DD HH:mm Z
+    out_file: '/var/log/pm2/web-out.log'
+    error_file: '/var/log/pm2/web-err.log'
