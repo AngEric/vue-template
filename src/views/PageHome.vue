@@ -11,7 +11,8 @@
           v-for="(item, idx) in menuList"
           :key="idx"
           :index="item.path"
-          @click="goToPage(item.name)">
+          @click="goToPage(item.name)"
+          v-bind:class="isActive(item.name) ? 'ant-menu-item-selected' : ''">
           <a-icon :type="item.icon" />
           <span>{{ item.title }}</span>
         </a-menu-item>
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import { TOGGLE_DEVICE_TYPE } from '../store/mutation-type';
 export default {
   name: 'DashboardPage',
   data() {
@@ -66,13 +68,34 @@ export default {
     return {
       collapsed: false,
       menuList,
+      isMobile: false,
+      selectedMenu: [],
     };
+  },
+  created() {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+     this.isMobile = true;
+   } else {
+     this.isMobile = false;
+   }
   },
   methods: {
     goToPage(pageName) {
-      console.log('hola');
-      this.$router.push({name: pageName});
+      // Collapsed side bar when navigate for Mobile Only
+      if (this.isMobile) {
+        this.collapsed = true;
+      }
+      if(this.$route.path !== `/dashboard/${pageName}`) {
+        this.$router.push({name: pageName});
+      }
     },
+    isActive(pageName) {
+      if(this.$route.path === `/dashboard/${pageName}`) {
+        return true;
+      }
+      
+      return false;
+    }
   },
 }
 </script>
