@@ -1,29 +1,15 @@
 <template>
   <a-layout id="home-layout">
-    <a-layout-sider 
-      v-model="collapsed" 
-      :trigger="null" 
-      breakpoint="lg"
-      collapsed-width="0">
-      <div class="header-logo"/>
-      <a-menu theme="dark" :defaultSelectedKeys="['0']">
-        <a-menu-item
-          v-for="(item, idx) in menuList"
-          :key="idx"
-          :index="item.path"
-          @click="goToPage(item.name)"
-          v-bind:class="isActive(item.name) ? 'ant-menu-item-selected' : ''">
-          <a-icon :type="item.icon" />
-          <span>{{ item.title }}</span>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
+    <MySideBar 
+      v-bind:isMobile="isMobile"
+      v-bind:isCollapsed="isCollapsed"
+      @onCollapsed="onCollapsed"></MySideBar>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0"> 
         <a-icon
           class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
+          :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="() => (isCollapsed = !isCollapsed)"
         />
         <span>Olahama</span>
       </a-layout-header>
@@ -35,68 +21,32 @@
 </template>
 
 <script>
-import { TOGGLE_DEVICE_TYPE } from '../store/mutation-type';
+import SideBar from '../components/Sidebar';
 export default {
   name: 'DashboardPage',
+  components: {
+    MySideBar: SideBar,
+  },
   data() {
-    const menuList = [
-      {
-        path: 'index',
-        name: 'index',
-        icon: 'dashboard',
-        title: 'Dashboard'
-      },
-      {
-        path: 'game',
-        name: 'game',
-        icon: 'project',
-        title: 'Project'
-      },
-      {
-        path: 'user',
-        name: 'user',
-        icon: 'user',
-        title: 'User'
-      },
-      {
-        path: 'broadcast',
-        name: 'broadcast',
-        icon: 'notification',
-        title: 'Broadcast'
-      },
-    ];
     return {
-      collapsed: false,
-      menuList,
+      isCollapsed: false,
       isMobile: false,
-      selectedMenu: [],
     };
   },
   created() {
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
      this.isMobile = true;
+     this.isCollapsed = true;
    } else {
      this.isMobile = false;
+     this.isCollapsed = false;
    }
   },
   methods: {
-    goToPage(pageName) {
-      // Collapsed side bar when navigate for Mobile Only
-      if (this.isMobile) {
-        this.collapsed = true;
-      }
-      if(this.$route.path !== `/dashboard/${pageName}`) {
-        this.$router.push({name: pageName});
-      }
-    },
-    isActive(pageName) {
-      if(this.$route.path === `/dashboard/${pageName}`) {
-        return true;
-      }
-      
-      return false;
+    onCollapsed() {
+      this.isCollapsed = true;
     }
-  },
+  }
 }
 </script>
 
