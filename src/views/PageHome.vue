@@ -1,27 +1,19 @@
 <template>
-  <a-layout id="dashboard-layout">
+  <a-layout id="home-layout">
     <a-layout-sider 
       v-model="collapsed" 
       :trigger="null" 
       breakpoint="lg"
       collapsed-width="0">
       <div class="header-logo"/>
-      <a-menu theme="dark">
-        <a-menu-item key="1">
-          <a-icon type="dashboard" />
-          <span>Dashboard</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="project" />
-          <span>Game List</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="user" />
-          <span>User</span>
-        </a-menu-item>
-        <a-menu-item key="4">
-          <a-icon type="notification" />
-          <span>Broadcast</span>
+      <a-menu theme="dark" :defaultSelectedKeys="['0']">
+        <a-menu-item
+          v-for="(item, idx) in menuList"
+          :key="idx"
+          :index="item.path"
+          @click="goToPage(item.name)">
+          <a-icon :type="item.icon" />
+          <span>{{ item.title }}</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -45,15 +37,48 @@
 export default {
   name: 'DashboardPage',
   data() {
+    const menuList = [
+      {
+        path: 'index',
+        name: 'index',
+        icon: 'dashboard',
+        title: 'Dashboard'
+      },
+      {
+        path: 'game',
+        name: 'game',
+        icon: 'project',
+        title: 'Project'
+      },
+      {
+        path: 'user',
+        name: 'user',
+        icon: 'user',
+        title: 'User'
+      },
+      {
+        path: 'broadcast',
+        name: 'broadcast',
+        icon: 'notification',
+        title: 'Broadcast'
+      },
+    ];
     return {
       collapsed: false,
+      menuList,
     };
+  },
+  methods: {
+    goToPage(pageName) {
+      console.log('hola');
+      this.$router.push({name: pageName});
+    },
   },
 }
 </script>
 
 <style lang="scss"> 
-#dashboard-layout {
+#home-layout {
   height: 100%;
   .trigger {
     font-size: 18px;
