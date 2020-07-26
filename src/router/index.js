@@ -7,6 +7,7 @@ import DashboardPage from '../views/PageDashboard.vue';
 import GameListPage from '../views/PageGameList.vue';
 import UserListPage from '../views/PageUserList.vue';
 import BroadcastPage from '../views/PageBroadcast.vue';
+import SettingPage from '../views/PageSetting.vue';
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ const routes = [
         path: 'broadcast',
         name: 'broadcast',
         component: BroadcastPage,
+      },
+      {
+        path: 'setting',
+        name: 'setting',
+        component: SettingPage,
       },
     ],
   }

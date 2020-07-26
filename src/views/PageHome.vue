@@ -5,14 +5,9 @@
       v-bind:isCollapsed="isCollapsed"
       @onCollapsed="onCollapsed"></MySideBar>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0"> 
-        <a-icon
-          class="trigger"
-          :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (isCollapsed = !isCollapsed)"
-        />
-        <span>Olahama</span>
-      </a-layout-header>
+      <MyHeader 
+        v-bind:isCollapsed="isCollapsed"
+        @onCollapsed="onCollapsed"></MyHeader>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
         <router-view />
       </a-layout-content>
@@ -22,10 +17,13 @@
 
 <script>
 import SideBar from '../components/Sidebar';
+import Header from '../components/Header';
+
 export default {
   name: 'DashboardPage',
   components: {
     MySideBar: SideBar,
+    MyHeader: Header,
   },
   data() {
     return {
@@ -44,7 +42,7 @@ export default {
   },
   methods: {
     onCollapsed() {
-      this.isCollapsed = true;
+      this.isCollapsed = !this.isCollapsed;
     }
   }
 }
