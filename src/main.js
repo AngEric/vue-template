@@ -3,11 +3,13 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import VueCookies from 'vue-cookies';
+import Snotify, {SnotifyPosition} from 'vue-snotify';
 import { BootstrapVue } from 'bootstrap-vue';
 import {Form, Input, Button, Icon, Layout, Menu, Dropdown, Avatar} from 'ant-design-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'ant-design-vue/dist/antd.css';
+import 'vue-snotify/styles/material.css';
 
 Vue.config.productionTip = false;
 
@@ -26,6 +28,15 @@ Vue.use(Layout);
 Vue.use(Menu);
 Vue.use(Dropdown);
 Vue.use(Avatar);
+
+// Notification
+const options = {
+  toast: {
+    position: SnotifyPosition.rightTop,
+    showProgressBar: false,
+  },
+}
+Vue.use(Snotify, options);
 
 new Vue({
   router,

@@ -63,6 +63,7 @@ export default {
         if (pageName === 'login') {
           // Clear all storage before logout
           this.logout();
+          this.$snotify.success('Logout successful', 'Success');
           this.$router.push({ path: `/${pageName}`});
         } else {
           this.$router.push({name: pageName});

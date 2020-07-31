@@ -40,3 +40,13 @@ body {
     }
   }
 }
+
+#myNotification {
+  .snotifyToast__inner {
+    font-size: 12px;
+  }
+  .snotify-icon {
+    max-width: 36px;
+    max-height: 36px;
+  }
+}

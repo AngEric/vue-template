@@ -63,10 +63,10 @@ export default {
     ]),
     clickLogin() {
       this.login().then((res) => {
+        this.$snotify.success('Login successful', 'Success');
         this.$router.push({path: '/'});
       }).catch(err => {
-        // Show popup error message
-        console.log(err);
+        this.$snotify.error(err.message, 'Error');
       });
     },
   }
