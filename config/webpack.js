@@ -97,6 +97,11 @@ const options = {
       cleanOnceBeforeBuildPatterns: [`${root}/dist`],
     }),
     new MiniCssPlugin({filename: 'css/[name].[hash:8].css'}),
+    new webpack.DefinePlugin({
+      'COOKIE_TOKEN': JSON.stringify(process.env.COOKIE_TOKEN),
+      'COOKIE_DOMAIN': JSON.stringify(process.env.COOKIE_DOMAIN),
+      'COOKIE_SECURE': JSON.stringify(process.env.COOKIE_SECURE),
+    }),
     new HtmlPlugin({
       inject: true,
       template: `${root}/index.html`,

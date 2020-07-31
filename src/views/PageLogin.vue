@@ -27,7 +27,7 @@
             </a-input>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" html-type="submit">
+            <a-button type="primary" html-type="submit" :loading="loading" @click="clickLogin">
               Login
             </a-button>
           </a-form-item>
@@ -38,7 +38,38 @@
 </template>
 
 <script>
+import { mapGetters, mapState, mapActions } from 'vuex';
+import { MODULES_LOGIN } from '../general/constant';
+
 export default {
+  name: 'LoginPage',
+  computed: {
+    ...mapGetters(MODULES_LOGIN, ['isLogin']),
+    ...mapState(MODULES_LOGIN,['loading']),
+  },
+  data() {
+    return {
+      form: this.$form.createForm(this, { name: 'form_login' }),
+    };
+  },
+  mounted() {
+    if (this.isLogin) {
+      this.$router.push({path: '/'});
+    }
+  },
+  methods: {
+    ...mapActions(MODULES_LOGIN, [
+      'login',
+    ]),
+    clickLogin() {
+      this.login().then((res) => {
+        this.$router.push({path: '/'});
+      }).catch(err => {
+        // Show popup error message
+        console.log(err);
+      });
+    },
+  }
 };
 </script>
 

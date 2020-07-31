@@ -62,6 +62,6 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach(Authentication);
+router.beforeEach(Authentication);
 
 export default router;

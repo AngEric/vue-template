@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import VueCookies from 'vue-cookies';
 import { BootstrapVue } from 'bootstrap-vue';
 import {Form, Input, Button, Icon, Layout, Menu, Dropdown, Avatar} from 'ant-design-vue';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -10,6 +11,10 @@ import 'ant-design-vue/dist/antd.css';
 
 Vue.config.productionTip = false;
 
+// Cookie
+Vue.use(VueCookies);
+
+// Bootstrap
 Vue.use(BootstrapVue);
 
 // Antd Component

@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { MODULES_LOGIN } from '../general/constant';
+
 export default {
   name: 'Header',
   props: ['isCollapsed'],
@@ -49,6 +52,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions(MODULES_LOGIN, [
+      'logout',
+    ]),
     triggerCollapse(){
       this.$emit('onCollapsed');
     },
@@ -56,6 +62,7 @@ export default {
       if(this.$route.path !== `/dashboard/${pageName}`) {
         if (pageName === 'login') {
           // Clear all storage before logout
+          this.logout();
           this.$router.push({ path: `/${pageName}`});
         } else {
           this.$router.push({name: pageName});
