@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import jwt from 'jsonwebtoken';
 import { mapGetters, mapState, mapActions } from 'vuex';
 import { MODULES_LOGIN } from '../general/constant';
 
@@ -56,17 +57,27 @@ export default {
     if (this.isLogin) {
       this.$router.push({path: '/'});
     }
+    
   },
   methods: {
     ...mapActions(MODULES_LOGIN, [
       'login',
     ]),
     clickLogin() {
-      this.login().then((res) => {
+      const options = {
+        email: 'eric@gmail.com',
+        password: '123456',
+      };
+
+      this.login(options).then((res) => {
         this.$snotify.success('Login successful', 'Success');
         this.$router.push({path: '/'});
       }).catch(err => {
-        this.$snotify.error(err.message, 'Error');
+        let message = err.message;
+        if (err.response && err.response.data) {
+          message = err.response.data.message;
+        }
+        this.$snotify.error(message, 'Login Failed');
       });
     },
   }

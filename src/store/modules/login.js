@@ -1,5 +1,7 @@
 import helper from '../../general/helper';
 import { EXPIRE_TIME } from '../../general/constant';
+import jwt from 'jsonwebtoken';
+import Auth from '../../services/auth';
 
 const initialState = () => ({
   loading: false,
@@ -21,22 +23,22 @@ const mutations = {
 };
 
 const actions = {
-  login({ commit, state }) {
+  login({ commit, state }, options) {
     return new Promise((resolve, reject) => {
-      try {
-        // Replace with JWT response
-        commit('setLoading', true);
+      commit('setLoading', true);
+      Auth.login(options).then((resp) => {
+        console.log(resp);
         const tempToken = 'tokenabc';
         const domain = state.domain;
         const expire = new Date(new Date().getTime() + EXPIRE_TIME).toUTCString();
         const secureCookie = COOKIE_SECURE === 'true' ? true : false;
         window.$cookies.set(COOKIE_TOKEN, tempToken, expire, null, domain, secureCookie);
-        // Remove this part to finally when using axios
-        commit('setLoading', false);
         resolve();
-      } catch (err) {
+      }).catch((err) => {
         reject(err);
-      }
+      }).finally(() => {
+        commit('setLoading', false);
+      });
     });
   },
   logout({ state }) {

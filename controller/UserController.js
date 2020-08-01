@@ -38,8 +38,8 @@ module.exports = {
       await database.adminUser.create(user);
       return res.json({status: 'ok', message: 'New user succesfully created.'});
     } catch (err) {
-      console.log(err);
-      return res.status(500).json({status: 'error', message: err.message});
+      console.error(err);
+      return res.status(500).json({status: 'error', message: 'Something went wrong, unable to create new user.'});
     }
   },
 };
