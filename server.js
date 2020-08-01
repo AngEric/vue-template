@@ -1,9 +1,21 @@
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const path = require('path');
 const app = express();
+const route = require('./route');
 
+app.set('view engine', 'ejs');
+app.use(helmet());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use('/api', route);
 app.use(express.static(path.join(__dirname, '/dist')));
 
+console.log('Setting up environment. Please wait..');
 if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack');
   const devWebpack = require('./config/webpack.js');

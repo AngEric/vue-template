@@ -2,15 +2,31 @@ require('dotenv').config();
 
 const app = require('../server.js');
 const http = require('http');
+const figlet = require('figlet');
 const port = process.env.PORT || 3000;
+const database= require('../models/index');
+const package = require('../package.json');
+const env = process.env.NODE_ENV;
 
 app.set('port', port);
 
 const server = http.createServer(app);
 
-server.on('listening', onListening);
-server.listen(port);
+database.sequelize.authenticate().then(() => {
+  server.on('listening', onListening);
+  server.listen(port);
+}).catch((err) => {
+  console.log(err);
+  process.exit(1);
+});
 
 function onListening() {
-  console.log(`Server is running on port : ${port}...`);
+  figlet(package.name, {font: 'Rectangles'}, (err, text) => {
+      if (err) console.log(err);
+      console.log(`${text}\n`);
+      console.log(`Database connected`);
+      console.log(`ENV\t: ${env}\nPORT\t: ${port}`);
+      console.log(`Server is running on port : ${port}...`);
+  });
+  
 }

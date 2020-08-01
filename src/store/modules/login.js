@@ -24,7 +24,6 @@ const actions = {
   login({ commit, state }) {
     return new Promise((resolve, reject) => {
       try {
-        console.log(state.domain);
         // Replace with JWT response
         commit('setLoading', true);
         const tempToken = 'tokenabc';
