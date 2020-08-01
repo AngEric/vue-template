@@ -22,13 +22,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      salt: {
+        type: Sequelize.CHAR(32),
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
       },
       updated_at: {
-        type: Sequelize.DATE,
-      },
-      deleted_at: {
         type: Sequelize.DATE,
       },
     });
