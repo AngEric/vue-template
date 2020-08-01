@@ -6,6 +6,7 @@ import VueCookies from 'vue-cookies';
 import Snotify, {SnotifyPosition} from 'vue-snotify';
 import { BootstrapVue } from 'bootstrap-vue';
 import {Form, Input, Button, Icon, Layout, Menu, Dropdown, Avatar} from 'ant-design-vue';
+import { ALERT_TIMEOUT_TIME } from './general/constant';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'ant-design-vue/dist/antd.css';
@@ -34,6 +35,7 @@ const options = {
   toast: {
     position: SnotifyPosition.rightTop,
     showProgressBar: false,
+    timeout: ALERT_TIMEOUT_TIME, // Set to 0 to disable timeout
   },
 }
 Vue.use(Snotify, options);

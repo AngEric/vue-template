@@ -1,7 +1,8 @@
 import helper from '../../general/helper';
-import { EXPIRE_TIME } from '../../general/constant';
 import jwt from 'jsonwebtoken';
 import Auth from '../../services/auth';
+import moment from 'moment';
+import Vue from 'vue';
 
 const initialState = () => ({
   loading: false,
@@ -27,12 +28,24 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit('setLoading', true);
       Auth.login(options).then((resp) => {
-        console.log(resp);
-        const tempToken = 'tokenabc';
+        const token = resp.data.data.token;
+        const credentialData = jwt.decode(token);
         const domain = state.domain;
-        const expire = new Date(new Date().getTime() + EXPIRE_TIME).toUTCString();
+        const expire = new Date(credentialData.exp * 1000);
         const secureCookie = COOKIE_SECURE === 'true' ? true : false;
-        window.$cookies.set(COOKIE_TOKEN, tempToken, expire, null, domain, secureCookie);
+        
+        // Use this for local or deployed environment
+        // window.$cookies.set(COOKIE_TOKEN, token, expire, null, domain, secureCookie);
+        
+        // Use this if you want to test in same wifi network
+        window.$cookies.set(COOKIE_TOKEN, token, expire);
+
+        const credential = {
+          name: credentialData.name,
+          email: credentialData.email,
+        };
+        Vue.prototype.$credential = credential;
+
         resolve();
       }).catch((err) => {
         reject(err);

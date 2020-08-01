@@ -8,7 +8,7 @@
     <div id="right-header">
       <a-dropdown>
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-          Hi, Eric Ang <a-icon type="down" />
+          Hi, {{ $credential.name }} <a-icon type="down" />
         </a>
         <a-menu slot="overlay">
           <a-menu-item

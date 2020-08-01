@@ -42,11 +42,14 @@ body {
 }
 
 #myNotification {
+  .snotifyToast {
+    padding: 10px;
+  }
   .snotifyToast__inner {
-    font-size: 12px;
+    font-size: 11px;
   }
   .snotify-icon {
-    max-width: 36px;
-    max-height: 36px;
+    max-width: 32px;
+    max-height: 32px;
   }
 }
