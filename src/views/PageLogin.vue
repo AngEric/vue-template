@@ -5,29 +5,29 @@
         <img src="assets/image/login-image.gif" style="width: 350px; height: 250px;" alt="logo"/>
       </div>
       <div class="form-wrap">
-        <a-form :form="form">
+        <a-form :form="form" @submit="clickLogin">
           <a-form-item >
             <a-input
               v-decorator="[
-                'userName',
-                { rules: [{ required: true, message: 'Please input your username!' }] },
+                'email',
+                { rules: [{ required: true, message: 'Please input your email!' }] },
               ]"
-              placeholder="Username">
+              placeholder="Email">
               <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
           <a-form-item >
-            <a-input
+            <a-input-password
               v-decorator="[
-                'userName',
-                { rules: [{ required: true, message: 'Please input your username!' }] },
+                'password',
+                { rules: [{ required: true, message: 'Please input your password!' }] },
               ]"
               placeholder="Password">
               <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-            </a-input>
+            </a-input-password>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" html-type="submit" :loading="loading" @click="clickLogin">
+            <a-button type="primary" html-type="submit" :loading="loading">
               Login
             </a-button>
           </a-form-item>
@@ -63,21 +63,21 @@ export default {
     ...mapActions(MODULES_LOGIN, [
       'login',
     ]),
-    clickLogin() {
-      const options = {
-        email: 'eric@gmail.com',
-        password: '123456',
-      };
-
-      this.login(options).then((res) => {
-        this.$snotify.success('Login successful', 'Success');
-        this.$router.push({path: '/'});
-      }).catch(err => {
-        let message = err.message;
-        if (err.response && err.response.data) {
-          message = err.response.data.message;
+    clickLogin(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.login(values).then((res) => {
+            this.$snotify.success('Login successful', 'Success');
+            this.$router.push({path: '/'});
+          }).catch(err => {
+            let message = err.message;
+            if (err.response && err.response.data) {
+              message = err.response.data.message;
+            }
+            this.$snotify.error(message, 'Login Failed');
+          });
         }
-        this.$snotify.error(message, 'Login Failed');
       });
     },
   }
