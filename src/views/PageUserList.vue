@@ -1,9 +1,14 @@
 <template>
   <div id="pageUserList">
     <a-page-header
-      style="border: 1px solid rgb(235, 237, 240)"
-      title="Admin User"
-    />
+      title="User">
+      <template slot="extra">
+        <a-button key="1" type="primary">
+          <a-icon class="align-icon" type="plus" />
+          Add New User
+        </a-button>
+      </template>
+    </a-page-header>
   </div>
 </template>
 

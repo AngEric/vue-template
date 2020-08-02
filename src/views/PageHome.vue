@@ -8,7 +8,7 @@
       <MyHeader 
         v-bind:isCollapsed="isCollapsed"
         @onCollapsed="onCollapsed"></MyHeader>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+      <a-layout-content :style="{ margin: '24px 16px', padding: '12px', background: '#fff', minHeight: '280px' }">
         <router-view />
       </a-layout-content>
     </a-layout>
