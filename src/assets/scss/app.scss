@@ -42,11 +42,8 @@ body {
 }
 
 #myNotification {
-  .snotifyToast {
-    padding: 10px;
-  }
   .snotifyToast__inner {
-    font-size: 11px;
+    font-size: 12px;
   }
   .snotify-icon {
     max-width: 32px;
@@ -58,10 +55,53 @@ body {
   padding: 8px 10px;
 }
 
-.align-icon {
+.anticon {
   vertical-align: baseline;
 }
 
 .data-table {
   margin: 10px 20px;
 }
+
+.switch-inactive {
+  background-color: #d41243;
+}
+
+.ant-table {
+  display: block;
+
+  @media screen and (max-width: 600px) {
+    &-thead {
+      display: none;
+    }
+
+    &-thead>tr,
+    &-tbody>tr {
+
+      th,
+      td {
+        &:first-of-type {
+          padding-top: 1rem;
+        }
+
+        &:last-of-type {
+          padding-bottom: 1rem;
+        }
+      }
+
+      >th,
+      >td {
+        display: block;
+        width: auto !important;
+        border: none;
+        padding: 0 1rem;
+        font-size: 1.1rem;
+
+        &:last-child {
+          border-bottom: 1px solid #eee;
+        }
+      }
+    }
+  }
+}
+

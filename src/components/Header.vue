@@ -8,8 +8,8 @@
     <div id="right-header">
       <a-dropdown class="header-menu">
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-          <a-icon class="align-icon" type="user" />
-          Hi, {{ $credential.name }} <a-icon class="align-icon" type="down" />
+          <a-icon type="user" />
+          Hi, {{ $credential.name }} <a-icon type="down" />
         </a>
         <a-menu id="header-menu" slot="overlay">
           <a-menu-item
@@ -17,7 +17,7 @@
             :key="idx"
             :index="item.path"
             @click="goToPage(item.name)">
-            <a-icon class="align-icons" :type="item.icon" />
+            <a-icon :type="item.icon" />
             <span>{{ item.title }}</span>
           </a-menu-item>
         </a-menu>

@@ -12,7 +12,7 @@
         :index="item.path"
         @click="goToPage(item.name)"
         v-bind:class="isActive(item.name) ? 'ant-menu-item-selected' : ''">
-        <a-icon class="align-icon" :type="item.icon" />
+        <a-icon :type="item.icon" />
         <span>{{ item.title }}</span>
       </a-menu-item>
     </a-menu>
