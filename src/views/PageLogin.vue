@@ -38,9 +38,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import jwt from 'jsonwebtoken';
 import { mapGetters, mapState, mapActions } from 'vuex';
 import { MODULES_LOGIN } from '../general/constant';
+import { EventBus } from '../event/event-bus';
 
 export default {
   name: 'LoginPage',

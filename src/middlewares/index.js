@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Vue from 'vue';
-
+import { EventBus } from '../event/event-bus';
 export default function (to, from, next) {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Check jwt / permission, if not available redirect to login
@@ -14,6 +14,7 @@ export default function (to, from, next) {
       Vue.prototype.$credential = credential;      
       next();
     }  else {
+      EventBus.$emit('snotifyInfo', 'Your session has expired. Please login again');
       next({ path: '/login' });
     }
   } else {

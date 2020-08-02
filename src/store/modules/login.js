@@ -35,10 +35,10 @@ const actions = {
         const secureCookie = COOKIE_SECURE === 'true' ? true : false;
         
         // Use this for local or deployed environment
-        // window.$cookies.set(COOKIE_TOKEN, token, expire, null, domain, secureCookie);
+        window.$cookies.set(COOKIE_TOKEN, token, expire, null, domain, secureCookie);
         
         // Use this if you want to test in same wifi network
-        window.$cookies.set(COOKIE_TOKEN, token, expire);
+        // window.$cookies.set(COOKIE_TOKEN, token, expire);
 
         const credential = {
           name: credentialData.name,

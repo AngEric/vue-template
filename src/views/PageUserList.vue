@@ -1,7 +1,10 @@
 <template>
-  <h1>
-    This is User List Page
-  </h1>
+  <div id="pageUserList">
+    <a-page-header
+      style="border: 1px solid rgb(235, 237, 240)"
+      title="Admin User"
+    />
+  </div>
 </template>
 
 <script>
