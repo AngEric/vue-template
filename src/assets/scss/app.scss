@@ -67,6 +67,12 @@ body {
   background-color: #d41243;
 }
 
+.ant-drawer-content-wrapper {
+  @media screen and (max-width: 600px) {
+    max-width: 100% !important;
+  }
+}
+
 .ant-table {
   display: block;
 
@@ -103,5 +109,11 @@ body {
       }
     }
   }
+}
+
+.drawer-submit {
+  border-top: '1px solid #e9e9e9';
+  text-align: right;
+  padding: '10px 16px';
 }
 

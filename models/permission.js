@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'permissions',
     timestamps: false,
     underscored: true,
+    defaultScope: {
+      where: {
+        status: 1,
+      },
+    },
   });
 
   return permission;

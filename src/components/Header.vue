@@ -28,7 +28,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { MODULES_LOGIN } from '../general/constant';
+import { MODULE_LOGIN } from '../general/constant';
 
 export default {
   name: 'Header',
@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(MODULES_LOGIN, [
+    ...mapActions(MODULE_LOGIN, [
       'logout',
     ]),
     triggerCollapse(){

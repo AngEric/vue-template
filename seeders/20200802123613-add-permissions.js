@@ -4,6 +4,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('permissions', [
       {
+        slug: 'all',
+        status: 1,
+      },
+      {
         slug: 'view-user-page',
         status: 1,
       },

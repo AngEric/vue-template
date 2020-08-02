@@ -5,7 +5,9 @@ import store from './store';
 import VueCookies from 'vue-cookies';
 import Snotify, {SnotifyPosition} from 'vue-snotify';
 import { BootstrapVue } from 'bootstrap-vue';
-import {Form, Input, Button, Icon, Layout, Menu, Dropdown, Avatar, PageHeader, Table, Tag, Switch} from 'ant-design-vue';
+import {Form, Input, Button, Icon, Layout, Menu, 
+        Dropdown, Avatar, PageHeader, Table, Tag, Switch,
+        Tabs, Checkbox, Drawer, Row, Col} from 'ant-design-vue';
 import { ALERT_TIMEOUT_TIME } from './general/constant';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -33,6 +35,11 @@ Vue.use(PageHeader);
 Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Switch);
+Vue.use(Tabs);
+Vue.use(Checkbox);
+Vue.use(Drawer);
+Vue.use(Row);
+Vue.use(Col);
 
 // Notification
 const options = {

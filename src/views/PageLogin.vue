@@ -41,14 +41,14 @@
 import Vue from 'vue';
 import jwt from 'jsonwebtoken';
 import { mapGetters, mapState, mapActions } from 'vuex';
-import { MODULES_LOGIN } from '../general/constant';
+import { MODULE_LOGIN } from '../general/constant';
 import { EventBus } from '../event/event-bus';
 
 export default {
   name: 'LoginPage',
   computed: {
-    ...mapGetters(MODULES_LOGIN, ['isLogin']),
-    ...mapState(MODULES_LOGIN,['loading']),
+    ...mapGetters(MODULE_LOGIN, ['isLogin']),
+    ...mapState(MODULE_LOGIN,['loading']),
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
     
   },
   methods: {
-    ...mapActions(MODULES_LOGIN, [
+    ...mapActions(MODULE_LOGIN, [
       'login',
     ]),
     clickLogin(e) {

@@ -1,7 +1,6 @@
 import helper from '../../general/helper';
 import jwt from 'jsonwebtoken';
 import Auth from '../../services/auth';
-import moment from 'moment';
 import Vue from 'vue';
 
 const initialState = () => ({
