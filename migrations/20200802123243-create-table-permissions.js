@@ -14,6 +14,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      section: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       status: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,

@@ -5,30 +5,37 @@ module.exports = {
     return queryInterface.bulkInsert('permissions', [
       {
         slug: 'all',
+        section: '',
         status: 1,
       },
       {
         slug: 'view-user-page',
+        section: 'User',
         status: 1,
       },
       {
         slug: 'add-new-user',
+        section: 'User',
         status: 1,
       },
       {
         slug: 'update-user',
+        section: 'User',
         status: 1,
       },
       {
         slug: 'view-role-page',
+        section: 'Role Setting',
         status: 1,
       },
       {
         slug: 'create-new-role',
+        section: 'Role Setting',
         status: 1,
       },
       {
         slug: 'update-role',
+        section: 'Role Setting',
         status: 1,
       },
     ], {});

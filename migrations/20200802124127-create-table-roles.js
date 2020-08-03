@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      permission: {
+      permissions: {
         type: Sequelize.JSON,
         allowNull: false,
       },

@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     slug: {
       type: DataTypes.STRING,
     },
+    section: {
+      type: DataTypes.STRING,
+    },
     status: {
       type: DataTypes.INTEGER,
     },

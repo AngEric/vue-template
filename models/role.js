@@ -1,4 +1,6 @@
 'use strict';
+const { Op } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   const role = sequelize.define('role', {
     id: {
@@ -10,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
     },
-    permission: {
+    permissions: {
       type: DataTypes.JSON,
     },
     status: {
@@ -27,6 +29,30 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     underscored: true,
   });
+
+  role.getAllData = async () => {
+    try {
+      let result = await sequelize.models.role.findAll({attributes: ['id', 'name', 'permissions', 'status']});
+      result = result.map((a) => {
+        a = a.get({plain: true});
+        return a;
+      });
+
+      for (let i = 0; i < result.length; i++) {
+        const permissions = await sequelize.models.permission.findAll({
+          where: {
+            id: {
+              [Op.in]: result[i].permissions,
+            },
+          },
+        });
+        result[i].active_permissions = permissions;
+      }
+      return Promise.resolve(result);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
 
   return role;
 };
