@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 import { MODULE_ROLE } from '../../general/constant';
 import _ from 'lodash';
 const permissionData = [
@@ -113,6 +113,9 @@ export default {
     ...mapMutations(MODULE_ROLE, [
       'handleDrawer',
     ]),
+    ...mapActions(MODULE_ROLE, [
+      'addRole',
+    ]),
     onClose() {
       this.handleDrawer(false);
       this.form.resetFields();
@@ -120,6 +123,18 @@ export default {
     submitRole(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
+        if (!err) {
+          this.addRole(values).then((res) => {
+            this.$snotify.success(res.message);
+            this.onClose();
+          }).catch(err => {
+            let message = err.message;
+            if (err.response && err.response.data) {
+              message = err.response.data.message;
+            }
+            this.$snotify.error(message);
+          });
+        }
       });
     },
     onDisabled(data) {

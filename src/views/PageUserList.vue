@@ -16,15 +16,16 @@
       :locale="localeOptions">
       <template slot="status" slot-scope="status">
         <a-tag
-        :color="status.toString() === '1' ? 'blue' : 'volcano'">
+        :color="status.toString() === '1' ? 'green' : 'volcano'">
           {{ status.toString() === '1' ? 'Active' : 'Inactive' }}
         </a-tag>
       </template>
       <template slot="action" slot-scope="record">
         <a-switch 
-          v-bind:class="record.status.toString() === '1' ? null : 'switch-inactive'"
+          v-bind:class="record.status.toString() === '1' ? 'switch-active' : 'switch-inactive'"
           :default-checked="record.status.toString() === '1' ? true: false"
           @change="updateUserStatus(record)"/>
+        <a-button type="link">Edit</a-button>
       </template>
   </a-table>
   </div>

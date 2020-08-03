@@ -1,11 +1,11 @@
-import helper from '../../general/helper';
+import Helper from '../../general/helper';
 import jwt from 'jsonwebtoken';
 import Auth from '../../services/auth';
 import Vue from 'vue';
 
 const initialState = () => ({
   loading: false,
-  domain: helper.setDomain(window.location.hostname),
+  domain: Helper.setDomain(window.location.hostname),
 });
 
 const state = initialState();

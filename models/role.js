@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       let result = await sequelize.models.role.findAll({attributes: ['id', 'name', 'permissions', 'status']});
       result = result.map((a) => {
         a = a.get({plain: true});
+        a.key = a.id;
         return a;
       });
 

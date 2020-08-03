@@ -12,19 +12,27 @@
     <a-table 
       class="data-table" 
       :columns="columns" 
-      :data-source="data"
+      :data-source="roleList"
       :locale="localeOptions">
+      <template slot="permissions" slot-scope="record">
+        <a-tag
+          v-for="tag in record.active_permissions"
+          :key="tag.id"
+          color="#108ee9">
+          {{ convertSlugToName(tag.slug) }}
+        </a-tag>
+      </template>
       <template slot="status" slot-scope="status">
         <a-tag
-        :color="status.toString() === '1' ? 'blue' : 'volcano'">
+        :color="status.toString() === '1' ? 'green' : 'volcano'">
           {{ status.toString() === '1' ? 'Active' : 'Inactive' }}
         </a-tag>
       </template>
       <template slot="action" slot-scope="record">
         <a-switch 
-          v-bind:class="record.status.toString() === '1' ? null : 'switch-inactive'"
-          :default-checked="record.status.toString() === '1' ? true: false"
-          @change="updateUserStatus(record)"/>
+          v-bind:class="record.status.toString() === '1' ? 'switch-active' : 'switch-inactive'"
+          :default-checked="record.status.toString() === '1' ? true: false"/>
+        <a-button type="link">Edit</a-button>
       </template>
     </a-table>
     <PanelRole/>
@@ -32,20 +40,28 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 import { MODULE_ROLE } from '../general/constant';
 import PanelRole from '../components/drawer/PanelRole';
+import Helper from '../general/helper';
 
 const columns = [
   {
     key: 'name',
     title: 'Name',
     dataIndex: 'name',
+    width: 250,
+  },
+  {
+    key: 'permissions',
+    title: 'Permissions',
+    scopedSlots: { customRender: 'permissions' },
   },
   {
     key: 'status',
     title: 'Status',
     dataIndex: 'status',
+    width: 150,
     scopedSlots: { customRender: 'status' },
   },
   {
@@ -55,8 +71,6 @@ const columns = [
   },
 ];
 
-const data = [];
-
 const localeOptions = {
   emptyText: 'There is no role yet'
 };
@@ -64,34 +78,35 @@ const localeOptions = {
 export default {
   name: 'RolePage',
   computed: {
-    ...mapState(MODULE_ROLE,['opened']),
+    ...mapState(MODULE_ROLE,['opened', 'roleList']),
   },
   components: {
     PanelRole,
   },
   data() {
     return {
-      data,
       columns,
       localeOptions,
     };
+  },
+  mounted() {
+    this.loadRole();
   },
   methods: {
     ...mapMutations(MODULE_ROLE, [
       'handleDrawer',
     ]),
-    updateUserStatus(record) {
-      // Hit update user status API
-      if (record.status === 1) {
-        record.status = 0;
-        this.$snotify.success('You have disabled this user');
-      } else {
-        record.status = 1;
-        this.$snotify.success('You have enabled this user');
-      }
-    },
+    ...mapActions(MODULE_ROLE, [
+      'loadRole',
+    ]),
     openRolePanel() {
       this.handleDrawer(true);
+    },
+    convertSlugToName(slug) {
+      const name = slug.replace(/-/g, ' ');
+      return name.replace(/\w\S*/g, (txt) => {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
     },
   },
 }
