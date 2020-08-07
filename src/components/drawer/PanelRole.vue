@@ -30,12 +30,12 @@
               style="width: 100%;">
               <a-row>
                 <a-col 
-                 v-for="(item, idx) in permissionData"
+                 v-for="(item, idx) in permissionList"
                  :key="idx"
                  :span="12">
                  <a-checkbox
                   :value="item.id"
-                  :disabled="onDisabled(item)">{{ item.name }}</a-checkbox>
+                  :disabled="onDisabled(item)">{{ convertSlugToName(item.slug) }}</a-checkbox>
                 </a-col>
               </a-row>
             </a-checkbox-group>
@@ -55,59 +55,27 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from 'vuex';
-import { MODULE_ROLE } from '../../general/constant';
 import _ from 'lodash';
-const permissionData = [
-  {
-    id: 1,
-    name: 'All',
-    slug: 'all',
-  },
-  {
-    id: 2,
-    name: 'View User Page',
-    slug: 'view-user-page',
-  },
-  {
-    id: 3,
-    name: 'Add New User',
-    slug: 'add-new-user',
-  },
-  {
-    id: 4,
-    name: 'Update User',
-    slug: 'update-user',
-  },
-  {
-    id: 5,
-    name: 'View Role Page',
-    slug: 'view-role-page',
-  },
-  {
-    id: 6,
-    name: 'Add New Role',
-    slug: 'add-new-role',
-  },
-  {
-    id: 7,
-    name: 'Update Role',
-    slug: 'update-role',
-  },
-];
+import { mapMutations, mapState, mapActions } from 'vuex';
+import { MODULE_ROLE, MODULE_PERMISSION } from '../../general/constant';
+import Converter from '../../mixin/converter';
+
 export default {
   name: 'RolePanel',
+  mixins: [Converter],
   computed: {
     ...mapState(MODULE_ROLE,['opened']),
+    ...mapState(MODULE_PERMISSION,['permissionList']),
   },
   data() {
     return {
       form: this.$form.createForm(this, {
-
       }),
       visible: false,
-      permissionData,
     };
+  },
+  mounted(){
+    this.loadPermission();
   },
   methods: {
     ...mapMutations(MODULE_ROLE, [
@@ -115,6 +83,9 @@ export default {
     ]),
     ...mapActions(MODULE_ROLE, [
       'addRole',
+    ]),
+    ...mapActions(MODULE_PERMISSION, [
+      'loadPermission',
     ]),
     onClose() {
       this.handleDrawer(false);
@@ -139,7 +110,7 @@ export default {
     },
     onDisabled(data) {
       const selectedPermissions = this.form.getFieldValue('permissions');
-      const superPermission = _.find(permissionData, (p) => p.slug === 'all');
+      const superPermission = _.find(this.permissionList, (p) => p.slug === 'all');
       if (!superPermission || !selectedPermissions) {
         return false;
       }

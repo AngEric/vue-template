@@ -44,7 +44,9 @@ import { mapMutations, mapState, mapActions } from 'vuex';
 import { MODULE_ROLE } from '../general/constant';
 import PanelRole from '../components/drawer/PanelRole';
 import Helper from '../general/helper';
+import Converter from '../mixin/converter';
 
+// Table column
 const columns = [
   {
     key: 'name',
@@ -77,6 +79,7 @@ const localeOptions = {
 
 export default {
   name: 'RolePage',
+  mixins: [Converter],
   computed: {
     ...mapState(MODULE_ROLE,['opened', 'roleList']),
   },
@@ -101,12 +104,6 @@ export default {
     ]),
     openRolePanel() {
       this.handleDrawer(true);
-    },
-    convertSlugToName(slug) {
-      const name = slug.replace(/-/g, ' ');
-      return name.replace(/\w\S*/g, (txt) => {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
     },
   },
 }
