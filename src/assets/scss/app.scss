@@ -121,3 +121,54 @@ body {
   padding: '10px 16px';
 }
 
+.ant-layout-sider {
+  background: $primary-color;
+  .ant-menu {
+    background: $primary-color;
+    .ant-menu-item {
+      margin: 15px 12px;
+      transition: color 0s;
+
+      >span {
+        font-size: 14px;
+      }
+    }
+    .ant-menu-item-selected {
+      border-radius: 20px !important;
+      background: #fff !important;
+
+      .anticon {
+        color: $primary-color;
+      }
+
+      >span {
+        color: $primary-color;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.ant-layout-header {
+  background: $primary-color;
+  padding: 0;
+  
+  .anticon {
+    color: #fff;
+  }
+
+  .header-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+  }
+}
+
+.ant-layout-content {
+  background: #fff;
+  padding: 12px;
+  margin: 24px 16px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px#ccc;
+}

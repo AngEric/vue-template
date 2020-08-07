@@ -8,7 +8,7 @@
       <MyHeader 
         v-bind:isCollapsed="isCollapsed"
         @onCollapsed="onCollapsed"></MyHeader>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '12px', background: '#fff', minHeight: '280px' }">
+      <a-layout-content>
         <router-view />
       </a-layout-content>
     </a-layout>
@@ -63,7 +63,7 @@ export default {
   }
   .header-logo {
     height: 32px;
-    background: rgba(255, 255, 255, 0.2);
+    background: #fff;
     margin: 16px;
   }
 }

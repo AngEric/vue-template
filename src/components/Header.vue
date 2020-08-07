@@ -1,15 +1,15 @@
 <template>
-  <a-layout-header style="background: #fff; padding: 0"> 
+  <a-layout-header> 
     <a-icon
       class="trigger"
       :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
       @click="triggerCollapse()"/>
-    <span>Olahama</span>
+    <span class="header-title">Olahama</span>
     <div id="right-header">
       <a-dropdown class="header-menu">
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
           <a-icon type="user" />
-          Hi, {{ $credential.name }} <a-icon type="down" />
+          <span>Hi, {{ $credential.name }} </span><a-icon type="down" />
         </a>
         <a-menu id="header-menu" slot="overlay">
           <a-menu-item
@@ -79,5 +79,8 @@ export default {
 #right-header {
   float: right !important;
   margin-right: 15px;
+  .header-menu >span {
+    color: #fff;
+  }
 }
 </style>
