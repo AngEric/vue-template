@@ -11,7 +11,7 @@
         :key="idx"
         :index="item.path"
         @click="goToPage(item.name)"
-        v-bind:class="isActive(item.name) ? 'ant-menu-item-selected' : null">
+        v-bind:class="isActive(item.name) ? 'ant-menu-item-selected' : ''">
         <a-icon :type="item.icon" />
         <span>{{ item.title }}</span>
       </a-menu-item>

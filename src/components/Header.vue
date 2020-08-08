@@ -4,7 +4,7 @@
       class="trigger"
       :type="isCollapsed ? 'menu-unfold' : 'menu-fold'"
       @click="triggerCollapse()"/>
-    <span class="header-title">Olahama</span>
+    <span class="header-title">{{ getHeaderTitle()}}</span>
     <div id="right-header">
       <a-dropdown class="header-menu">
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
@@ -29,10 +29,12 @@
 <script>
 import { mapActions } from 'vuex';
 import { MODULE_LOGIN } from '../general/constant';
+import Converter from '../mixin/converter';
 
 export default {
   name: 'Header',
   props: ['isCollapsed'],
+  mixins: [Converter],
   data() {
     const menuList = [
       {
@@ -59,6 +61,10 @@ export default {
     triggerCollapse(){
       this.$emit('onCollapsed');
     },
+    getHeaderTitle() {
+      const headerTitle = this.$route.name === 'index' ? 'dashboard' : this.$route.name;
+      return this.convertToTitle(headerTitle);
+    },
     goToPage(pageName) {
       if(this.$route.path !== `/dashboard/${pageName}`) {
         if (pageName === 'login') {
@@ -80,7 +86,7 @@ export default {
   float: right !important;
   margin-right: 15px;
   .header-menu >span {
-    color: #fff;
+    color: #000000;
   }
 }
 </style>

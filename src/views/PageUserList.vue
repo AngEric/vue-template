@@ -1,7 +1,6 @@
 <template>
   <div id="pageUserList">
-    <a-page-header
-      title="User">
+    <a-page-header>
       <template slot="extra">
         <a-button key="1" type="primary">
           <a-icon type="plus" />
