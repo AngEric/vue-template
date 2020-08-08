@@ -7,4 +7,7 @@ export default {
   create(data) {
     return axios.post('/api/role', data);
   },
+  updateStatus(data) {
+    return axios.put('/api/role/status', data);
+  },
 };

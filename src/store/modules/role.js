@@ -49,6 +49,19 @@ const actions = {
       });
     });
   },
+  updateStatus({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      commit('setLoading', true);
+      Role.updateStatus(data).then((resp) => {
+        commit('setRoleList', resp.data.data);
+        resolve(resp.data);
+      }).catch((err) => {
+        reject(err);
+      }).finally(() => {
+        commit('setLoading', false);
+      });
+    });
+  },
 };
 
 export default {

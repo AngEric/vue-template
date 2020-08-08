@@ -48,4 +48,32 @@ module.exports = {
       return res.status(500).json({status: 'error', message: 'Something is wrong. Cannot create new role.'})
     }
   },
+  updateStatus: async (req, res) => {
+    try {
+      const {id} = req.body;
+      const existingData = await database.role.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (!existingData) {
+        return res.status(400).json({status: 'error', message: 'Role does not exists.'});
+      }
+      const status = existingData.status;
+      await database.role.update({
+        status: parseInt(status) === 1 ? 0 : 1
+      }, { 
+        where: {
+          id: id,
+        },
+      });
+      const result = await database.role.getAllData();
+      return res.json({status: 'ok', data: result, 
+        message: parseInt(status) === 0 ? 'You have enabled this role' : 'You have disabled this role'
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({status: 'error', message: 'Something is wrong. Cannot update this role.'})
+    }
+  },
 };

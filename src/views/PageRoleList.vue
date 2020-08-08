@@ -35,7 +35,8 @@
       <template slot="action" slot-scope="record">
         <a-switch 
           v-bind:class="record.status.toString() === '1' ? 'switch-active' : 'switch-inactive'"
-          :default-checked="record.status.toString() === '1' ? true: false"/>
+          :default-checked="record.status.toString() === '1' ? true: false"
+          @change="updateRoleStatus(record)"/>
         <a-button type="link">Edit</a-button>
       </template>
     </a-table>
@@ -105,10 +106,25 @@ export default {
     ]),
     ...mapActions(MODULE_ROLE, [
       'loadRole',
+      'updateStatus'
     ]),
     openRolePanel() {
       this.handleDrawer(true);
     },
+    updateRoleStatus(record) {
+      const data = {
+        id: record.id,
+      };
+      this.updateStatus(data).then((res) => {
+        this.$snotify.success(res.message);
+      }).catch(err => {
+        let message = err.message;
+        if (err.response && err.response.data) {
+          message = err.response.data.message;
+        }
+        this.$snotify.error(message);
+      });
+    }
   },
 }
 </script>
