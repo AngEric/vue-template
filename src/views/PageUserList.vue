@@ -4,10 +4,10 @@
       <template slot="title">
         <span>User</span>
         <br/>
-        <span class="header-subtitle">Manage all your users here</span>
+        <span class="header-subtitle">Manage all users and assign their role</span>
       </template>
       <template slot="extra">
-        <a-button key="1" type="primary">
+        <a-button key="1" type="primary" @click="openUserPanel">
           <a-icon type="plus" />
           Add New User
         </a-button>
@@ -16,7 +16,7 @@
     <a-table 
       class="data-table" 
       :columns="columns" 
-      :data-source="data"
+      :data-source="userList"
       :locale="localeOptions">
       <template slot="status" slot-scope="status">
         <a-tag
@@ -31,11 +31,16 @@
           @change="updateUserStatus(record)"/>
         <a-button type="link">Edit</a-button>
       </template>
-  </a-table>
+    </a-table>
+    <PanelUser/>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState, mapActions } from 'vuex';
+import { MODULE_USER } from '../general/constant';
+import PanelUser from '../components/drawer/PanelUser';
+
 const columns = [
   {
     key: 'name',
@@ -46,6 +51,11 @@ const columns = [
     key: 'email',
     title: 'Email',
     dataIndex: 'email',
+  },
+  {
+    key: 'role',
+    title: 'Role',
+    dataIndex: 'role_name',
   },
   {
     key: 'status',
@@ -60,44 +70,46 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'Eric',
-    email: 'eric.ang@gmail.com',
-    status: 1,
-  },
-  {
-    key: '2',
-    name: 'Olahama',
-    email: 'olahama@gmail.com',
-    status: 0,
-  },
-];
-
 const localeOptions = {
   emptyText: 'There is no user yet'
 };
 
 export default {
   name: 'UserListPage',
+  components: {
+    PanelUser,
+  },
+  computed: {
+    ...mapState(MODULE_USER,['opened', 'userList']),
+  },
   data() {
     return {
-      data,
       columns,
       localeOptions,
     };
   },
+  mounted() {
+    this.loadUser()
+      .catch(err => {
+        let message = err.message;
+        if (err.response && err.response.data) {
+          message = err.response.data.message;
+        }
+        this.$snotify.error(message);
+      });
+  },
   methods: {
+    ...mapMutations(MODULE_USER, [
+      'handleDrawer',
+    ]),
+    ...mapActions(MODULE_USER, [
+      'loadUser',
+    ]),
+    openUserPanel() {
+      this.handleDrawer(true);
+    },
     updateUserStatus(record) {
       // Hit update user status API
-      if (record.status === 1) {
-        record.status = 0;
-        this.$snotify.success('You have disabled this user', 'Success');
-      } else {
-        record.status = 1;
-        this.$snotify.success('You have enabled this user', 'Success');
-      }
     },
   },
 }

@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.CHAR(32),
         allowNull: false,
       },
+      role_id: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
       status: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,

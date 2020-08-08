@@ -14,6 +14,7 @@ router.get('/status', PublicController.checkStatus);
 router.post('/auth/login', AuthController.login);
 
 // User API
+router.get('/user', UserController.list);
 router.post('/user', UserController.create);
 
 // Permission API

@@ -2,7 +2,17 @@ const database = require('../models');
 const crypto = require('../services/crypto');
 const validator = require('../services/validator');
 const {PASSWORD_MIN_LENGTH} = require('../config/constants');
+
 module.exports = {
+  list: async (req, res) => {
+    try {
+      const result = await database.adminUser.getAllData();
+      return res.json({status: 'ok', data: result});
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({status: 'error', message: 'Something is wrong. Cannot get user list.'})
+    }
+  },
   create: async (req, res) => {
     try {
       const {email, password, name} = req.body;
