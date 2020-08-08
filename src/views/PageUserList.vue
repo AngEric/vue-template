@@ -93,10 +93,10 @@ export default {
       // Hit update user status API
       if (record.status === 1) {
         record.status = 0;
-        this.$snotify.success('You have disabled this user');
+        this.$snotify.success('You have disabled this user', 'Success');
       } else {
         record.status = 1;
-        this.$snotify.success('You have enabled this user');
+        this.$snotify.success('You have enabled this user', 'Success');
       }
     },
   },

@@ -43,8 +43,23 @@ body {
 }
 
 #myNotification {
-  .snotifyToast__inner {
-    font-size: 12px;
+  .snotifyToast {
+    border-top: 1px solid #ebedf0;
+    border-right: 1px solid #ebedf0;
+    border-bottom: 1px solid #ebedf0;
+    box-shadow: 0px 3px 5px 0px #ccc;
+  }
+
+  .snotify-rightTop {
+    right: 15px;
+  }
+
+  .snotifyToast__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .snotifyToast__body {
+    font-size: 14px;
   }
   .snotify-icon {
     max-width: 32px;
@@ -81,18 +96,11 @@ body {
 .ant-table {
   display: block;
 
-  
-
   .ant-table-thead > tr > th {
     background: transparent;
     >span {
       font-weight: bold;
     }
-  }
-
-  .ant-table-tbody > tr {
-    border: 2px solid red;
-    border-collapse: collapse !important;
   }
 
   @media screen and (max-width: 600px) {

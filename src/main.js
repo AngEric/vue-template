@@ -13,7 +13,7 @@ import { ALERT_TIMEOUT_TIME } from './general/constant';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'ant-design-vue/dist/antd.css';
-import 'vue-snotify/styles/material.css';
+import 'vue-snotify/styles/simple.css'; // Change this css for notification theme
 
 Vue.config.productionTip = false;
 
