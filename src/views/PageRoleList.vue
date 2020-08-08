@@ -1,7 +1,11 @@
 <template>
   <div id="pageUserList">
-    <a-page-header
-      title="Role">
+    <a-page-header>
+      <template slot="title">
+        <span>Role</span>
+        <br/>
+        <span class="header-subtitle">Manage role and access permission</span>
+      </template>
       <template slot="extra">
         <a-button key="1" type="primary" @click="openRolePanel">
           <a-icon type="plus" />

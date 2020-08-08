@@ -19,7 +19,7 @@
 
 <script>
 import ChangePasswordPage from './PageChangePassword';
-import RolePage from './PageRole';
+import RolePage from './PageRoleList';
 
 export default {
   name: 'SettingPage',

@@ -7,7 +7,8 @@ import Snotify, {SnotifyPosition} from 'vue-snotify';
 import { BootstrapVue } from 'bootstrap-vue';
 import {Form, Input, Button, Icon, Layout, Menu, 
         Dropdown, Avatar, PageHeader, Table, Tag, Switch,
-        Tabs, Checkbox, Drawer, Row, Col, Divider} from 'ant-design-vue';
+        Tabs, Checkbox, Drawer, Row, Col, Divider,
+        Statistic} from 'ant-design-vue';
 import { ALERT_TIMEOUT_TIME } from './general/constant';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -41,6 +42,7 @@ Vue.use(Drawer);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Divider);
+Vue.use(Statistic);
 
 // Notification
 const options = {

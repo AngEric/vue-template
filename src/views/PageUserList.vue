@@ -1,6 +1,11 @@
 <template>
   <div id="pageUserList">
     <a-page-header>
+      <template slot="title">
+        <span>User</span>
+        <br/>
+        <span class="header-subtitle">Manage all your users here</span>
+      </template>
       <template slot="extra">
         <a-button key="1" type="primary">
           <a-icon type="plus" />
@@ -98,6 +103,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+#pageHeader {
+  margin: 0;
+  padding: 16px 24px;
+}
 </style>
